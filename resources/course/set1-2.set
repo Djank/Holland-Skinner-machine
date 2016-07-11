@@ -1,4 +1,15 @@
-# Set file for Holland Skinner Machine
-!set_number: 1.2
-!set_name: Conditioned Reflexes
+{
+"set_number" : "1.2",
+"set_name": "Conditioned Reflexes",
+"exhibit": "",
 
+"frames": [
+
+{"This is content of frame 1. The correct answer is \"answer\". ______":
+["answer"]},
+
+{"This is content of frame 2. The correct answers are \"answer1.1\" or \"answer1.2\", and \"answer2\". 1 ______. 2 ______":
+[["answer1.1", "answer 1.2"], ["answer2"]]}
+
+]
+}

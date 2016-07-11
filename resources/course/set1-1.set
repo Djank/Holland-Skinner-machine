@@ -1,29 +1,15 @@
-# Set file for Holland Skinner Machine
-!set_number: 1.1
-!set_name: Simple Reflexes
+{
+"set_number" : "1.1",
+"set_name": "Simple Reflexes",
+"exhibit": "",
 
-# Exhibit material
-# !exhibit: none
-# or
-# !exhibit:
-# Several lines of
-# material to exhibit
+"frames": [
 
-!exhibit: none
+{"This is content of frame 1. The correct answer is \"answer\". ______":
+["answer"]},
 
-# Frames:
-!frame 1
-This is content of frame 1. It spans several lines. The correct answer is
-"answer". ______
+{"This is content of frame 2. The correct answers are \"answer1.1\" or \"answer1.2\", and \"answer2\". 1 ______. 2 ______":
+[["answer1.1", "answer 1.2"], ["answer2"]]}
 
-# Correct answers to frame 1
-!correct 1
-answer
-
-!frame 2
-This is content of frame 2. It spans several lines. The correct answers are
-"answer1.1", "answer1.2" and "answer2". 1 ______. 2 ______
-
-!correct 2
-answer1.1; answer 1.2
-answer2
+]
+}
