@@ -1,0 +1,24 @@
+{
+"set_number" : "1.1",
+"set_name": "Sequence of simple questions",
+"exhibit": "",
+
+"frames": [
+
+["This is content of frame 1. The correct answers are \"answer1.1\" or \"answer1.2\", and \"answer2\". 1 ______. 2 ______",
+["answer1.1", "answer 1.2"], ["answer2"]],
+
+["This is content of frame 2. The correct answer is \"answer2\". ______",
+["answer2"]],
+
+["This is content of frame 3. The correct answer is \"answer3\". ______",
+["answer3"]],
+
+["This is content of frame 4. The correct answer is \"answer4\". ______",
+["answer4"]],
+
+["This is content of frame 5. The correct answer is \"answer5\". ______",
+["answer5"]]
+
+]
+}

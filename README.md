@@ -7,10 +7,11 @@ by Holland and Skinner.
 
 On program launch the user is being greeted.
 
-He is presented with his progress information.
-(Options: Go to page, Quit)
+He is presented with the course curriculum, with his current set marked
+with an arrow.
+At this point the user may quit or proceed.
 
-On G keypress the user is redirected to the main program interface - the
+After pressing "Enter" the user is redirected to the main program interface - the
 frame screen.
 Here he can see:
 - the name of the current set
