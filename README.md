@@ -13,13 +13,14 @@ At this point the user may quit or proceed.
 
 After pressing "Enter" the user is redirected to the main program interface - the
 frame screen.
-Here he can see:
-- the name of the current set
+The program prints:
+- the number and name of the current set
 - the number of the frame and total number of frames in current set
-- the contents of the page
-- one or more pairs of fields:
-	- for answer entry
-	- for correct answer display
+- the contents of the frame
+Then the program asks the user to enter answers to the question 1.
+The user may enter "?" to get a prompt: the first letter of the correct
+answer.
+
 - prompt display field
 - keyprompts:			TO DO: think about implementation
 	- exit set

@@ -59,48 +59,73 @@ def display_contents(course_folder, current_set_num):
 
 def get_prompt(answer, prompt):
     """ Returns next prompt """
+    prompt = answer[:len(prompt) + 1]
+    print(prompt)
     return prompt
 
 def answers_input(frame_answers, progress):
-    correct = 'correct'
+    message = 'correct'
     # loop through answers
     for i in range(len(frame_answers)):
         prompt = ""
-        user_input = input(str(i + 1) + ': ') # question number as prompt
-        if user_input in frame_answers[i]:
-            print('  ', user_input, "Correct!")
-            next
-        elif user_input == '?':
-            correct = 'incorrect'
-            # prompt is given by the first of alternative correct answers
-            prompt = get_prompt(frame_answers[i][0], prompt)
-    return correct
+        # loop for the sake of prompting
+        while prompt != frame_answers[i][0]:
+            # Display question number every time
+            user_input = input(str(i + 1) + ': ')
+            if user_input in frame_answers[i]:
+                print('  ', user_input, "\nCorrect!")
+                break
+            elif user_input == 'q':
+                return 'User quit'
+            else: 
+                message = 'incorrect'
+                if user_input == '?':
+                    # prompt is given by the first of alternative correct answers
+                    prompt = get_prompt(frame_answers[i][0], prompt)
+                else:
+                    for answer in frame_answers[i]:
+                        print("  ", answer)
+                    print("Incorrect")
+                    break
+    return message
 
-def frames_loop(progress, curriculum):
+def frames_loop(progress_file_path, curriculum):
     """ frames interface main loop """
-    # Load current set into memory
+    # load progress data
+    with open(progress_file_path) as p:
+        progress = json.loads(p.read())
+    # loop sets
     for set_path in curriculum:
         with open(set_path) as f:
             the_set = json.loads(f.read())
-            set_number = the_set["set_number"]
-            set_name = the_set["set_name"]
-            exhibit, frames = the_set["exhibit"], the_set["frames"]
-            current_frame_num = progress["current_frame_num"]
+        set_number = the_set["set_number"]
+        set_name = the_set["set_name"]
+        exhibit = the_set["exhibit"]
+        frames = the_set["frames"]
         # Loop frames
-            for frame in frames[current_frame_num:]:
-                # Display stuff
-                # Set title
-                print(set_number.ljust(3), set_name.ljust(60), end = "")
-                # Progress (Frame 5 / 26)
-                print("Frame", current_frame_num, "/", len(frames), "\n")
-                # The contents of current frame
-                print(frame[0], "\n")
-                # Ask for input once.
-                print('Please enter your answers. Enter "?" to get a prompt.')
-                if answers_input(frame[1:], progress) == 'correct':
-                    # ADD TO FRAMES COMPLETE
-                    pass
-
+        for frame in frames[progress["current_frame_num"]:]:
+            # Display stuff
+            # Set title
+            print(set_number.ljust(3), set_name.ljust(60), end = "")
+            # Progress (Frame 5 / 26)
+            print("Frame", progress["current_frame_num"] + 1,
+                  "/", len(frames), "\n")
+            # The contents of current frame
+            print(frame[0], "\n")
+            # Ask for input once
+            print('Please enter your answers. Enter "?" to get a prompt.')
+            msg = answers_input(frame[1:], progress)
+            if msg == 'correct':
+                progress["frames_complete"].append(progress["current_frame_num"])
+                progress["current_frame_num"] += 1
+            elif msg == 'User quit':
+                # record progress to file, quit
+                print('Saving progress')
+                with open(progress_file_path, 'w') as p:
+                    p.write(json.dumps(progress))
+                print('Done!')
+                return 'User quit'
+                    
 def main():
     """ Main entry point for the script """
     # HSM.py file path:
@@ -120,7 +145,7 @@ def main():
                                   progress["current_set_num"])
     if curriculum == 'User quit':
         return 'User quit'
-    frames_loop(progress, curriculum)
+    frames_loop(progress_file_path, curriculum)
         
     return "Normal exit"
 
