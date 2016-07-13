@@ -57,12 +57,24 @@ def display_contents(course_folder, current_set_num):
 ##    else:
     return curriculum
 
-def answers_input(frame_answers):
+def get_prompt(answer, prompt):
+    """ Returns next prompt """
+    return prompt
+
+def answers_input(frame_answers, progress):
+    correct = 'correct'
+    # loop through answers
     for i in range(len(frame_answers)):
         prompt = ""
         user_input = input(str(i + 1) + ': ') # question number as prompt
         if user_input in frame_answers[i]:
             print('  ', user_input, "Correct!")
+            next
+        elif user_input == '?':
+            correct = 'incorrect'
+            # prompt is given by the first of alternative correct answers
+            prompt = get_prompt(frame_answers[i][0], prompt)
+    return correct
 
 def frames_loop(progress, curriculum):
     """ frames interface main loop """
@@ -85,7 +97,9 @@ def frames_loop(progress, curriculum):
                 print(frame[0], "\n")
                 # Ask for input once.
                 print('Please enter your answers. Enter "?" to get a prompt.')
-                answers_input(frame[1:])
+                if answers_input(frame[1:], progress) == 'correct':
+                    # ADD TO FRAMES COMPLETE
+                    pass
 
 def main():
     """ Main entry point for the script """
