@@ -17,7 +17,6 @@ def display_welcome():
 def display_contents(course_folder, current_set_num):
     """ prints course contents and prompts the user to quit or proceed """
     print("Course contents:")
-    curriculum = {} # {set-number: path-to-set} for future use
     for set_filename in mylistdir(course_folder):
         set_path = os.path.join(course_folder, set_filename)
         with open(set_path) as f:
@@ -28,13 +27,13 @@ def display_contents(course_folder, current_set_num):
             if this_set_num == current_set_num:
                 print(this_set_name.upper() + \
                       "<-- current set".rjust(65 - len(this_set_name)))
+                current_set_path = set_path
             else:
                 print(this_set_name)
-            curriculum[this_set_num] = set_path
 #    if input("[q]uit or [enter]\n") == 'q':
 #        return 'User quit'
 #    else:
-    return curriculum
+    return current_set_path
 
 def get_progress(progress_file_path):
     """ returns user progress """
@@ -47,7 +46,7 @@ def get_progress(progress_file_path):
         with open(progress_file_path, 'r') as f:
             return (json.loads(f.read()))
 
-def display_frame(progress, curriculum):
+def display_frame(progress, current_set_filename):
     """ displays the frame interface """
     # TODO
     pass
@@ -64,11 +63,11 @@ def main():
     progress_file_path = os.path.join(resources_path, "progress.json")
     display_welcome()
     progress = get_progress(progress_file_path)
-    curriculum = display_contents(course_folder_path, progress["current set"])
-    if curriculum == 'User quit':
+    current_set_path = display_contents(course_folder_path, \
+                                            progress["current set"])
+    if current_set_path == 'User quit':
         return 'User quit'
-    display_frame(progress, curriculum)
-    
+    display_frame(progress, current_set_path)
     return "Normal exit"
 
 if __name__ == '__main__':
