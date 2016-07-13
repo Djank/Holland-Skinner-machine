@@ -5,20 +5,20 @@
 
 "frames": [
 
-{"This is content of frame 1. The correct answer is \"answer\". ______":
-["answer1"]},
+["This is content of frame 1. The correct answer is \"answer1\". ______",
+["answer1"]],
 
-{"This is content of frame 2. The correct answer is \"answer\". ______":
-["answer1"]},
+["This is content of frame 2. The correct answer is \"answer2\". ______",
+["answer2"]],
 
-{"This is content of frame 3. The correct answer is \"answer\". ______":
-["answer1"]},
+["This is content of frame 3. The correct answer is \"answer3\". ______",
+["answer3"]],
 
-{"This is content of frame 4. The correct answer is \"answer\". ______":
-["answer1"]},
+["This is content of frame 4. The correct answer is \"answer4\". ______",
+["answer4"]],
 
-{"This is content of frame 5. The correct answer is \"answer\". ______":
-["answer1"]}
+["This is content of frame 5. The correct answer is \"answer5\". ______",
+["answer5"]]
 
 ]
 }
