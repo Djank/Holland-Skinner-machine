@@ -31,7 +31,7 @@ def display_contents(course_folder, current_lesson_num):
             if curriculum:
                 curriculum.append(lesson_path)
             if this_lesson_num == current_lesson_num:
-                print(this_lesson_name.upper() + \
+                print(this_lesson_name.upper(),
                       "<-- current lesson".rjust(65 - len(this_lesson_name)))
                 # start compiling curriculum from the current lesson:
                 curriculum.append(lesson_path)
@@ -47,14 +47,12 @@ def teaching_loop(progress, curriculum):
     for lesson_path in curriculum:
         current_lesson = Lesson(lesson_path)
         progress.current_lesson_num = current_lesson.number
-        print("--1--")
         progress.save()
         frames_to_do = [x for x in range(current_lesson.number_of_frames)
                         if x not in progress.frames_complete]
         # Loop frames
         for i in frames_to_do:
             progress.current_frame_num = i
-            print("--2--")
             progress.save()
             current_lesson.display_frame(i)
             if answer_loop(current_lesson.answers_to_frame(i)):
