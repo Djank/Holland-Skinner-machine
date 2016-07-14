@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import sys, os, json
 
 def mylistdir(directory):
@@ -45,17 +47,18 @@ def teaching_loop(progress, curriculum):
     for lesson_path in curriculum:
         current_lesson = Lesson(lesson_path)
         progress.current_lesson_num = current_lesson.number
+        print("--1--")
         progress.save()
         frames_to_do = [x for x in range(current_lesson.number_of_frames)
                         if x not in progress.frames_complete]
         # Loop frames
         for i in frames_to_do:
             progress.current_frame_num = i
+            print("--2--")
             progress.save()
             current_lesson.display_frame(i)
             if answer_loop(current_lesson.answers_to_frame(i)):
-                progress.frames_complete.append[i]
-                progress.save()
+                progress.frames_complete.append(i)
             else: frames_to_do.append(i)
         progress.frames_complete = []
 
@@ -66,17 +69,18 @@ def answer_loop(answers):
         prompt = ""
         # while incomplete prompt - repeat the same question
         while prompt != answers[i][0]:
-            user_answer = user_input(prompt = str(i+1),
+            user_answer = user_input(prompt = str(i+1) + ': ',
                                      message = "[q]uit, [h]elp, or [?] to get prompt.")
-            if a in answers[i]:
+            if user_answer in answers[i]:
                 for answer in answers[i]:
                     print('  ', answer)
                 print('Correct!')
                 break
             else:
                 all_answers_correct = False
-                if user_answer = '?':
-                    get_prompt(answers[i][0], prompt)
+                if user_answer == '?':
+                    prompt = get_prompt(answers[i][0], prompt)
+                    print(prompt)
                 else:
                     for answer in answers[i]:
                         print('  ', answer)
@@ -86,9 +90,7 @@ def answer_loop(answers):
 
 def get_prompt(answer, prompt):
     """ Returns next prompt """
-    prompt = answer[:len(prompt) + 1]
-    print(prompt)
-    return prompt
+    return answer[:len(prompt) + 1]
 
 def hsm_help():
     print("Not implemented yet, sorry :)")
@@ -137,7 +139,7 @@ def user_input(prompt="", message="[q]uit, [h]elp or [Enter] to proceed:"):
         sys.exit(print("User quit"))
     elif msg == 'h':
         hsm_help()
-        return user_input(prompt)
+        return user_input(prompt, message)
     else: return msg
 
 def main():

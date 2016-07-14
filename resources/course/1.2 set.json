@@ -8,7 +8,7 @@
 ["This is content of frame 1. The correct answers are \"answer1\" and \"answer2\". 1 ______. 2 ______.",
 ["answer1"], ["answer2"]],
 
-["This is content of frame 1. The correct answers are \"answer1.1\" or \"answer1.2\", and \"answer2\". 1 ______. 2 ______.",
+["This is content of frame 2. The correct answers are \"answer1.1\" or \"answer1.2\", and \"answer2\". 1 ______. 2 ______.",
 ["answer1.1", "answer1.2"], ["answer2"]]
 
 ]
