@@ -68,7 +68,8 @@ def answer_loop(answers):
         # while incomplete prompt - repeat the same question
         while prompt != answers[i][0]:
             user_answer = user_input(prompt = str(i+1) + ': ',
-                                     message = "[q]uit, [h]elp, or [?] to get prompt.")
+                                     message = '[q]uit, [h]elp, or '
+                                               '[?] to get prompt.')
             if user_answer in answers[i]:
                 for answer in answers[i]:
                     print('  ', answer)
