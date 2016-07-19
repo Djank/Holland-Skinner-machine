@@ -8,17 +8,30 @@ def mylistdir(directory):
     filelist = os.listdir(directory)
     return [x for x in filelist if not (x.startswith('.'))]
 
+### есть ощущение, что эта функция лишняя
+### этот код можно инлайнить прям в main, хотя это дело вкуса
 def display_welcome():
     """ print welcome line on launch of program """
     print()
     print("Welcome to Holland-Skinner Teaching Machine!\n".center(80))
 
+### тут, мне кажется, есть баг
+### ты уверен, что mylistdir() вернёт файлы уже отсортированные по имени и возрастанию?
+### если нет, то current_lesson_num может встретиться где угодно
+### и, возможно, нужные файлы не попадут в список.
+### + лучше разнести по разным функциям отбор lesson_path и вывод названий уроков
+### и да, может лучше сразу делать объекты Lesson? чтобы лишний раз не вызывать json.loads
 def display_contents(course_folder, current_lesson_num):
     """ prints course contents and prompts the user to quit or proceed.
         returns current lesson path and the curriculum dictionary """
     print("Course contents:\n")
     curriculum = []
     
+    ### очевидный комментарий - и так понятно, что происходит
+    ### лучше комментировать не очевидные вещи (мат. формулы, хитрый алгоритм и т.п. )
+    ### по хорошему, код должен быть понятен без комментариев, т.е. самодокументируемым
+    ### -> ясные имена переменных и функций, простая структура, не глубокие ветвления и т.д.
+    ### ps комменты к функциям и классам - это хорошо! т.к. в ide дают развернутую информацию
     # Going over the course files
     for lesson_filename in mylistdir(course_folder):
         lesson_path = os.path.join(course_folder, lesson_filename)
@@ -38,6 +51,9 @@ def display_contents(course_folder, current_lesson_num):
             else:
                 print(this_lesson_name)
     print()
+    ### вот это тут тоже не надо
+    ### к коду выше оно вроде как не относиться
+    ### выноси лучше в main
     user_input()
     return curriculum
 
@@ -91,6 +107,9 @@ def get_prompt(answer, prompt):
     """ Returns next prompt """
     return answer[:len(prompt) + 1]
 
+### такие заготовки в коде некоторые считают плохим стилем
+### часто они так и остаются мусором в коде. 
+### сделай лучше todo.md в корне
 def hsm_help():
     print("Not implemented yet, sorry :)")
 
